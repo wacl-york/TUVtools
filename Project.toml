@@ -1,0 +1,8 @@
+name = "TUVtools"
+uuid = "345a537c-f292-11e8-1826-5db092d7553c"
+authors = ["Peter Bräuer <pb866@york.ac.uk>"]
+version = "0.1.0-DEV"
+julia = "≥0.7"
+
+[deps]
+filehandling = "4b8ed5e0-8069-11e8-094b-3f5425e6acdd"
