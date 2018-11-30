@@ -33,3 +33,21 @@ MCMv3.3.1 | TUVlabel
     54    | CH3CHONO2CH3 -> CH3CHOCH3 + NO2
     55    | C(CH3)3(ONO2) -> C(CH3)3(O.) + NO2
     56    | CH3COCH2(ONO2) -> CH3COCH2(O.) + NO2
+# Edwards et al. MCM extensions
+  1300    | HNO4 -> HO2 + NO2
+  1001    | HOBr -> OH + Br
+  1002    | BrO -> Br + O
+  1003    | Br2 -> Br + Br
+  1004    | BrONO2 -> Br + NO3
+  1005    | BrONO2 -> BrO + NO2
+  1006    | ClONO2 -> Cl + NO3
+  1007    | ClONO2 -> ClO + NO2
+  1008    | Cl2 -> Cl + Cl
+  1009    | ClNO2 -> Cl + NO2
+  1010    | ClO -> Cl + O(1D)
+  1011    | ClO -> Cl + O(3P)
+  1012    | HCl -> H + Cl
+  1013    | BrNO2 -> Br + NO2
+  1100    | IO -> I + O
+  1101    | HOI -> I + OH
+  1102    | OIO -> I + O2

@@ -34,3 +34,21 @@ MCMv3.2 | SF   | TUVlabel
    55   | 1.00 | C(CH3)3(ONO2) -> C(CH3)3(O.) + NO2
    56   | 0.75 | CH3COCH2(ONO2) -> CH3COCH2(O.) + NO2
    57   | 0.25 | CH3COCH2(ONO2) -> CH3COCH2(O.) + NO2
+# Edwards et al. MCM extensions
+ 1300   | 1.00 | HNO4 -> HO2 + NO2
+ 1001   | 1.00 | HOBr -> OH + Br
+ 1002   | 1.00 | BrO -> Br + O
+ 1003   | 1.00 | Br2 -> Br + Br
+ 1004   | 1.00 | BrONO2 -> Br + NO3
+ 1005   | 1.00 | BrONO2 -> BrO + NO2
+ 1006   | 1.00 | ClONO2 -> Cl + NO3
+ 1007   | 1.00 | ClONO2 -> ClO + NO2
+ 1008   | 1.00 | Cl2 -> Cl + Cl
+ 1009   | 1.00 | ClNO2 -> Cl + NO2
+ 1010   | 1.00 | ClO -> Cl + O(1D)
+ 1011   | 1.00 | ClO -> Cl + O(3P)
+ 1012   | 1.00 | HCl -> H + Cl
+ 1013   | 1.00 | BrNO2 -> Br + NO2
+ 1100   | 1.00 | IO -> I + O
+ 1101   | 1.00 | HOI -> I + OH
+ 1102   | 1.00 | OIO -> I + O2
