@@ -217,7 +217,6 @@ function set_flags(setflags, rxnlist, istart::Int64=0, iend::Int64=0,
       idx = findfirst(rxnlist.==rxn)
       if idx == nothing
         push!(fail, rxn)
-        println("fail: $rxn")
       else
         flags[idx] = 'T'
       end
@@ -233,6 +232,13 @@ function set_flags(setflags, rxnlist, istart::Int64=0, iend::Int64=0,
 end #function set_flags
 
 
+"""
+    write_incfiles(rxnlist, tuvdir)
+
+From the `rxnlist` of TUV reactions in the order of the output file and the directory
+of the current TUV version `tuvdir`, write include files for the box model DSMACC
+to link TUV to it and save them in the main TUV folder.
+"""
 function write_incfiles(rxnlist, tuvdir)
   cd(tuvdir)
   mcm32 = read_data(joinpath(@__DIR__, "data/MCMv32.db"), sep = "|",
@@ -247,18 +253,20 @@ function write_incfiles(rxnlist, tuvdir)
       println(f, "  SELECT CASE (jl)")
       for (j, label) = enumerate(unique(db[i][:label]))
         tuvnumber = findfirst(rxnlist.==label)
-        @printf(f, "    CASE(%d) ! %s\n", tuvnumber, label)
-        dsmaccnumber = findall(db[i][:label].==label)
-        println("$j: $dsmaccnumber")
-        for n in dsmaccnumber
-          println("$n: $(db[i][:number][n])")
-          if haskey(db[i], :SF) && db[i][:SF][n] ≠ 1
-            println("SF: $(db[i][:SF][n])")
-            @printf(f, "      j(%d) = seval(szabin,theta,tmp,tmp2,b,c,d)*%.3f\n",
-              db[i][:number][n], db[i][:SF][n])
-          else
-            @printf(f, "      j(%d) = seval(szabin,theta,tmp,tmp2,b,c,d)\n",
-              db[i][:number][n])
+        if tuvnumber == nothing
+          println("\033[95mWarning! Reaction $label not found in TUV.\n\33[0m",
+            "Reaction ignored in $file.")
+        else
+          @printf(f, "    CASE(%d) ! %s\n", tuvnumber, label)
+          dsmaccnumber = findall(db[i][:label].==label)
+          for n in dsmaccnumber
+            if haskey(db[i], :SF) && db[i][:SF][n] ≠ 1
+              @printf(f, "      j(%d) = seval(szabin,theta,tmp,tmp2,b,c,d)*%.3f\n",
+                db[i][:number][n], db[i][:SF][n])
+            else
+              @printf(f, "      j(%d) = seval(szabin,theta,tmp,tmp2,b,c,d)\n",
+                db[i][:number][n])
+            end
           end
         end
       end # loop over reactions

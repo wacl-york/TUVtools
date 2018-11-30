@@ -213,3 +213,20 @@ MCM/GECKO-A | TUVlabel
     88011   | Ald (poly)
     88111   | uDICARaa(poly)
     88121   | uDICARak(poly)
+# Edwards et al. MCM extensions
+     1001   | HOBr -> OH + Br
+     1002   | BrO -> Br + O
+     1003   | Br2 -> Br + Br
+     1004   | BrONO2 -> Br + NO3
+     1005   | BrONO2 -> BrO + NO2
+     1006   | ClONO2 -> Cl + NO3
+     1007   | ClONO2 -> ClO + NO2
+     1008   | Cl2 -> Cl + Cl
+     1009   | ClNO2 -> Cl + NO2
+     1010   | ClO -> Cl + O(1D)
+     1011   | ClO -> Cl + O(3P)
+     1012   | HCl -> H + Cl
+     1013   | BrNO2 -> Br + NO2
+     1100   | IO -> I + O
+     1101   | HOI -> I + OH
+     1102   | OIO -> I + O2
