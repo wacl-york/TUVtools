@@ -12,7 +12,7 @@ function getfiles(tuvdir)
   callfiles = deepcopy(tuvfiles)
   deleteat!(callfiles,findall(startswith.(callfiles, "rxn")))
   rxnfiles = setdiff(tuvfiles, callfiles)
-  return rxnfiles, callfiles
+  return rxnfiles, callfiles, tuvdir
 end #function getfiles
 
 
@@ -160,9 +160,23 @@ function write_rxns(filelist, tuvdir, rxnlist, setflags)
       [println(f, line) for line in lines[iend:end]]
     end
   end
-
 end #function write_rxns
 
+
+"""
+    set_flags(setflags, rxnlist, istart::Int64=0, iend::Int64=0, lines::Vector{String}=String[])
+
+Set flags according to `setflags` option for reactios in the `rxnlist`.
+For the default `setflags` option to leave flags unchagend, additionally the file
+content of the current TUV file `lines`, and the beginning `istartz` and end index
+`iend` of the mechanism section is needed.
+
+The following `setflags` options exist (default: use from original input file):
+- `0`: Set all flags to `F`
+- `1`: Set all flags to `T`
+- `2`: Set reactions used in MCM/GECKO-A to `T`, all other to `F`
+- `3`: Set reactions used in MCMv3.3.1 `T`, all other to `F`
+"""
 function set_flags(setflags, rxnlist, istart::Int64=0, iend::Int64=0,
                   lines::Vector{String}=String[])
   # Use existing flags
@@ -217,3 +231,38 @@ function set_flags(setflags, rxnlist, istart::Int64=0, iend::Int64=0,
 
   return flags
 end #function set_flags
+
+
+function write_incfiles(rxnlist, tuvdir)
+  cd(tuvdir)
+  mcm32 = read_data(joinpath(@__DIR__, "data/MCMv32.db"), sep = "|",
+  headerskip = 1, colnames = ["number", "SF", "label"])
+  mcm33 = read_data(joinpath(@__DIR__, "data/MCMv331.db"), sep = "|",
+  headerskip = 1, colnames = ["number", "label"])
+  mcm4 = read_data(joinpath(@__DIR__, "data/MCM-GECKO-A.db"), sep = "|",
+  headerskip = 1, colnames = ["number", "label"])
+  db = [mcm32, mcm33, mcm4]
+  for (i, file) in enumerate(["MCMv32.inc", "MCMv331.inc", "MCM-GECKO-A.inc"])
+    open(file, "w") do f
+      println(f, "  SELECT CASE (jl)")
+      for (j, label) = enumerate(unique(db[i][:label]))
+        tuvnumber = findfirst(rxnlist.==label)
+        @printf(f, "    CASE(%d) ! %s\n", tuvnumber, label)
+        dsmaccnumber = findall(db[i][:label].==label)
+        println("$j: $dsmaccnumber")
+        for n in dsmaccnumber
+          println("$n: $(db[i][:number][n])")
+          if haskey(db[i], :SF) && db[i][:SF][n] ≠ 1
+            println("SF: $(db[i][:SF][n])")
+            @printf(f, "      j(%d) = seval(szabin,theta,tmp,tmp2,b,c,d)*%.3f\n",
+              db[i][:number][n], db[i][:SF][n])
+          else
+            @printf(f, "      j(%d) = seval(szabin,theta,tmp,tmp2,b,c,d)\n",
+              db[i][:number][n])
+          end
+        end
+      end # loop over reactions
+      println(f, "  END SELECT")
+    end # close file
+  end # loop over files
+end

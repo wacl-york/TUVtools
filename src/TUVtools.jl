@@ -18,7 +18,8 @@ module TUVtools
 using filehandling
 using Printf
 
-export setrxns
+export setrxns,
+       generate_incfiles
 
 # Include private functions
 include("setrxns.jl")
@@ -45,7 +46,7 @@ function setrxns(tuvdir::String; inputfiles::Union{String,Vector{String}}="",
   # Save current directory
   currdir = pwd()
   # Find files related to photolysis mechanism
-  rxnfiles, callfiles = getfiles(tuvdir)
+  rxnfiles, callfiles, tuvdir = getfiles(tuvdir)
   # get list of reactions in order for input files
   rxnlist = generate_rxns(rxnfiles, callfiles)
 
@@ -56,5 +57,19 @@ function setrxns(tuvdir::String; inputfiles::Union{String,Vector{String}}="",
 end #function setrxns
 
 
+function generate_incfiles(tuvdir::String)
+
+  # Save current directory
+  currdir = pwd()
+  # Find files related to photolysis mechanism
+  rxnfiles, callfiles, tuvdir = getfiles(tuvdir)
+  # get list of reactions in order for input files
+  rxnlist = generate_rxns(rxnfiles, callfiles)
+
+  # Auto-generate inc files for TUV_DSMACC
+  write_incfiles(rxnlist, tuvdir)
+  # Go back to original directory
+  cd(currdir)
+end
 
 end # module TUVtools
