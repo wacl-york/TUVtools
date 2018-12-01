@@ -19,7 +19,8 @@ using filehandling
 using Printf
 
 export setrxns,
-       generate_incfiles
+       generate_incfiles,
+       generate_wiki
 
 # Include private functions
 include("setrxns.jl")
@@ -57,6 +58,11 @@ function setrxns(tuvdir::String; inputfiles::Union{String,Vector{String}}="",
 end #function setrxns
 
 
+"""
+    generate_incfiles(tuvdir::String)
+
+Generate include files to link TUV in directory `tuvdir` to the box model DSMACC.
+"""
 function generate_incfiles(tuvdir::String)
 
   # Save current directory
@@ -71,5 +77,27 @@ function generate_incfiles(tuvdir::String)
   # Go back to original directory
   cd(currdir)
 end
+
+
+"""
+    generate_wiki(tuvdir::String)
+
+Generate markdown files from a template, where reactions numbers from TUV in `tuvdir`
+and in MCM/GECKO-A are listed for every reaction listed at the beginning of each
+template line.
+"""
+function generate_wiki(tuvdir::String)
+  # Save current directory
+  currdir = pwd()
+  # Find files related to photolysis mechanism
+  rxnfiles, callfiles, tuvdir = getfiles(tuvdir)
+  # get list of reactions in order for input files
+  rxnlist = generate_rxns(rxnfiles, callfiles)
+
+  # Auto-generate inc files for TUV_DSMACC
+  write_wiki(rxnlist, tuvdir)
+  # Go back to original directory
+  cd(currdir)
+end #function generate_wiki
 
 end # module TUVtools

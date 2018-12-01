@@ -273,4 +273,45 @@ function write_incfiles(rxnlist, tuvdir)
       println(f, "  END SELECT")
     end # close file
   end # loop over files
-end
+end #function write_incfiles
+
+
+"""
+    write_incfiles(rxnlist, tuvdir)
+
+From the `rxnlist` of TUV reactions in the order of the output file and the directory
+of the current TUV version `tuvdir`, write include files for the box model DSMACC
+to link TUV to it and save them in the main TUV folder.
+"""
+function write_wiki(rxnlist, tuvdir)
+  # Make sure to be in the TUV main directory
+  cd(tuvdir)
+  # Read MCM reaction numbers saved in the data files for every version
+  mcm3 = read_data(joinpath(@__DIR__, "data/MCMv331.db"), sep = "|",
+  headerskip = 1, colnames = ["number", "label"])
+  mcm4 = read_data(joinpath(@__DIR__, "data/MCM-GECKO-A.db"), sep = "|",
+  headerskip = 1, colnames = ["number", "label"])
+  # Combine all versions in an array
+  db = [mcm4, mcm3]
+  # Define I/O file names including folder paths
+  ifile = joinpath.(@__DIR__,["data/WIKItemplate_MCM-GECKO-A.md",
+           "data/WIKItemplate_MCMv3.md"])
+  ofile = joinpath.(tuvdir,["../MCM-GECKO-A-photolysis-reaction-numbers.md",
+           "../MCMv3.3.1-photolysis-reaction-numbers.md"])
+  # Define padding width for output formatting in wiki file for every MCM version
+  len = [11, 7]
+  for i = 1:length(ifile)
+    wiki = readfile(ifile[i])
+    for (j, rxn) = enumerate(unique(db[i][:label]))
+      n = findfirst(startswith.(wiki,rxn))
+      try
+        wiki[n] = @sprintf("%s | %3d | %s", rpad("J($(db[i][:number][j]))",len[i]),
+          findfirst(rxnlist.==rxn), wiki[n])
+      catch;
+      end
+    end # loop over reactions
+    open(ofile[i], "w") do f
+      [println(f, line) for line in wiki]
+    end # close file
+  end # loop over files
+end #function write_wiki
