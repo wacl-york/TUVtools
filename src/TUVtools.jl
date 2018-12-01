@@ -80,13 +80,17 @@ end
 
 
 """
-    generate_wiki(tuvdir::String)
+    generate_wiki(tuvdir::String, kwargs)
 
-Generate markdown files from a template, where reactions numbers from TUV in `tuvdir`
-and in MCM/GECKO-A are listed for every reaction listed at the beginning of each
-template line.
+Generate markdown files from templates specified kwarg `wikitemplates`, where
+reactions numbers from TUV in `tuvdir` and in MCM/GECKO-A are listed for every
+reaction listed at the beginning of each template line and written to files specified
+by kwarg `wikioutput`. The table `collength` can be specifief with a kwarg, for nicer
+md file formatting. The `MCMversion` needs to be specified for every wiki template.
 """
-function generate_wiki(tuvdir::String)
+function generate_wiki(tuvdir::String; wikitemplates::Union{String, Vector{String}}="WIKItemplate.md",
+  wikioutput::Union{String, Vector{String}}="WIKI.md", collength::Union{Int64,Vector{Int64}}=10,
+  MCMversion::Union{Int64,Vector{Int64}}=4)
   # Save current directory
   currdir = pwd()
   # Find files related to photolysis mechanism
@@ -95,7 +99,7 @@ function generate_wiki(tuvdir::String)
   rxnlist = generate_rxns(rxnfiles, callfiles)
 
   # Auto-generate inc files for TUV_DSMACC
-  write_wiki(rxnlist, tuvdir)
+  write_wiki(rxnlist, tuvdir, wikitemplates, wikioutput, collength, MCMversion, currdir)
   # Go back to original directory
   cd(currdir)
 end #function generate_wiki
