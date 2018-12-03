@@ -1,0 +1,54 @@
+MCMv3.2 | SF   | TUVlabel
+    1   | 1.00 | O3 -> O2 + O(1D)
+    2   | 1.00 | O3 -> O2 + O(3P)
+    3   | 1.00 | H2O2 -> 2 OH
+    4   | 1.00 | NO2 -> NO + O(3P)
+    5   | 1.00 | NO3 -> NO + O2
+    6   | 1.00 | NO3 -> NO2 + O(3P)
+    7   | 1.00 | HNO2 -> OH + NO
+    8   | 1.00 | HNO3 -> OH + NO2
+   11   | 1.00 | CH2O -> H + HCO
+   12   | 1.00 | CH2O -> H2 + CO
+   13   | 1.00 | CH3CHO -> CH3 + HCO
+   14   | 1.00 | C2H5CHO -> C2H5 + HCO
+   15   | 1.00 | n-C3H7CHO -> n-C3H7 + CHO
+   16   | 1.00 | n-C3H7CHO -> C2H4 + CH2CHOH
+   17   | 1.00 | i-C3H7CHO -> i-C3H7 + CHO
+   18   | 1.00 | CH2=C(CH3)CHO -> CH2=CCH3 + CHO
+   19   | 1.00 | CH2=C(CH3)CHO -> CH2=C(CH3)CO + H
+   20   | 1.00 | HPALD -> Products
+   21   | 1.00 | CH3COCH3 -> CH3CO + CH3
+   22   | 1.00 | CH3COCH2CH3 -> CH3CO + CH2CH3
+   23   | 1.00 | CH3COCH=CH2 -> C3H6 + CO
+   24   | 1.00 | CH3COCH=CH2 -> C2H3 + CH3CO
+   31   | 1.00 | CHOCHO -> H2 + 2 CO
+   32   | 1.00 | CHOCHO -> CH2O + CO
+   33   | 1.00 | CHOCHO -> 2 HO2 + 2 CO
+   34   | 1.00 | CH3COCHO -> CH3CO + HCO
+   35   | 1.00 | CH3COCOCH3 -> Products
+   41   | 1.00 | CH3OOH -> CH3O + OH
+   51   | 1.00 | CH3ONO2 -> CH3O + NO2
+   52   | 1.00 | C2H5ONO2 -> C2H5O + NO2
+   53   | 1.00 | n-C3H7ONO2 -> C3H7O + NO2
+   54   | 1.00 | CH3CHONO2CH3 -> CH3CHOCH3 + NO2
+   55   | 1.00 | C(CH3)3(ONO2) -> C(CH3)3(O.) + NO2
+   56   | 0.75 | CH3COCH2(ONO2) -> CH3COCH2(O.) + NO2
+   57   | 0.25 | CH3COCH2(ONO2) -> CH3COCH2(O.) + NO2
+# Edwards et al. MCM extensions
+ 1300   | 1.00 | HNO4 -> HO2 + NO2
+ 1001   | 1.00 | HOBr -> OH + Br
+ 1002   | 1.00 | BrO -> Br + O
+ 1003   | 1.00 | Br2 -> Br + Br
+ 1004   | 1.00 | BrONO2 -> Br + NO3
+ 1005   | 1.00 | BrONO2 -> BrO + NO2
+ 1006   | 1.00 | ClONO2 -> Cl + NO3
+ 1007   | 1.00 | ClONO2 -> ClO + NO2
+ 1008   | 1.00 | Cl2 -> Cl + Cl
+ 1009   | 1.00 | ClNO2 -> Cl + NO2
+ 1010   | 1.00 | ClO -> Cl + O(1D)
+ 1011   | 1.00 | ClO -> Cl + O(3P)
+ 1012   | 1.00 | HCl -> H + Cl
+ 1013   | 1.00 | BrNO2 -> Br + NO2
+ 1100   | 1.00 | IO -> I + O
+ 1101   | 1.00 | HOI -> I + OH
+ 1102   | 1.00 | OIO -> I + O2

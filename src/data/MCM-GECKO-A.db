@@ -1,0 +1,232 @@
+MCM/GECKO-A | TUVlabel
+        1   | O3 -> O2 + O(1D)
+        2   | O3 -> O2 + O(3P)
+        3   | H2O2 -> 2 OH
+        4   | NO2 -> NO + O(3P)
+        5   | NO3 -> NO + O2
+        6   | NO3 -> NO2 + O(3P)
+        7   | HNO2 -> OH + NO
+        8   | HNO3 -> OH + NO2
+        9   | HNO4 -> HO2 + NO2
+       10   | HNO4 -> OH + NO3
+    11011   | CH2O -> H + HCO
+    11012   | CH2O -> H2 + CO
+    11021   | CH3CHO -> CH3 + HCO
+    11022   | CH3CHO -> CH3CO + H
+    11031   | C2H5CHO -> C2H5 + HCO
+    11041   | n-C3H7CHO -> n-C3H7 + CHO
+    11042   | n-C3H7CHO -> C2H4 + CH2CHOH
+    11051   | n-C4H9CHO -> C4H9 + CHO
+    11061   | n-C5H11CHO -> C5H11 + CHO
+    11071   | n-C6H13CHO -> C6H13 + CHO
+    11081   | n-C7H15CHO -> C7H15 + CHO
+    12011   | i-C3H7CHO -> i-C3H7 + CHO
+    12021   | i-C4H9CHO -> C4H9 + CHO
+    12022   | i-C4H9CHO -> CH3CH=CH2 + CH2=CHOH
+    12031   | sec-C4H9CHO -> C4H9 + CHO
+    12032   | sec-C4H9CHO -> CH3CH=CHOH + CH2=CH2
+    12041   | t-C4H9CHO -> C4H9 + CHO
+    12051   | C4H9CH(C2H5)CHO -> C7H15 + CHO
+    12061   | tALD -> products
+    12071   | neoC5H11CHO -> neoC5H11 + CHO
+    13011   | CH2=CHCHO -> CH2=CH + CHO
+    13012   | CH2=CHCHO -> CH2=CH2 + CO
+    13013   | CH2=CHCHO -> CH2=CHCO + H
+    13021   | CH3CH=CHCHO -> CH3CH=CH + CHO
+    13022   | CH3CH=CHCHO -> CH3CH=CH2 + CO
+    13023   | CH3CH=CHCHO -> CH3CH=CHCO + H
+    13031   | 2-hexenal -> 1-pentenyl radical + CHO
+    13032   | 2-hexenal -> 1-pentene + CO
+    13033   | 2-hexenal -> C3H7CH=CHCO + H
+    13041   | hexadienal -> 1-pentenyl radical + CHO
+    13042   | hexadienal -> 1,3-pentadiene + CO
+    13043   | hexadienal -> CH3CH=CHCH=CHCO + H
+    13051   | CH2=C(CH3)CHO -> CH2=CCH3 + CHO
+    13052   | CH2=C(CH3)CHO -> CH3CH=CH2 + CO
+    13053   | CH2=C(CH3)CHO -> CH2=C(CH3)CO + H
+    13061   | CH3C(CH3)=CHCHO -> (CH3)2C=CH + CHO
+    13062   | CH3C(CH3)=CHCHO -> (CH3)2C=CH2 + CO
+    13063   | CH3C(CH3)=CHCHO -> (CH3)2C=CHCO + H
+    13071   | CH3CH=C(CH3)CHO -> CH3CH=CCH3 + CHO
+    13072   | CH3CH=C(CH3)CHO -> CH3CH=CHCH3 + CO
+    13073   | CH3CH=C(CH3)CHO -> CH3CH=C(CH3)CO + H
+    13081   | luALD -> NI products
+    13082   | luALD -> alkene + CO
+    13083   | luALD -> acyl + H
+    15011   | HOCH2CHO -> CH2OH + HCO
+    15021   | ALD3OH -> R(OH) + HCO
+    15031   | ALD4OH -> NI products
+    15032   | ALD4OH -> NII products
+    15041   | C5nALDOH -> NI products
+    15051   | C6nALDOH -> NI products
+    15061   | C7nALDOH -> NI products
+    15071   | C8nALDOH -> NI products
+    15111   | intAldOH -> R + CHO
+    16021   | Glycidaldehyde -> oxyranyl radical + CHO
+    21011   | CH3COCH3 -> CH3CO + CH3
+    21012   | CH3COCH3 -> CO + 2 CH3
+    21021   | CH3COCH2CH3 -> CH3CO + CH2CH3
+    21031   | C3H7COCH3 -> CH3CO + C3H7
+    21032   | C3H7COCH3 -> C3H7 + CO + CH3
+    21033   | C3H7COCH3 -> CH3C(OH)=CH2 + CH2=CH2
+    21041   | C2H5COC2H5 -> C2H5CO + C2H5
+    21051   | C4H9COCH3 -> CH3CH=CH2 + CH2=C(OH)CH3
+    21061   | C3H7COC2H5 -> C2H5CO + C3H7
+    21062   | C3H7COC2H5 -> C3H7CO + C2H5
+    21063   | C3H7COC2H5 -> C3H7 + CO + C2H5
+    21064   | C3H7COC2H5 -> C2H5C(OH)=CH2 + CH2=CH2
+    21071   | lKET5 -> products
+    21081   | 4-heptanone -> NI products
+    21091   | 4-octanone -> NI products
+    22011   | MIPK -> CH3CO + i-C3H7
+    22012   | MIPK -> i-C3H7CO + CH3
+    22013   | MIPK -> i-C3H7 + CO + CH3
+    22014   | MIPK -> CH2=CHOH + CH3CH=CH2
+    22021   | MIBK -> CH3CO + i-C4H9
+    22031   | 5-Me-2-hexanone -> CH3CO + CH2CH2CH(CH3)2
+    22041   | 4-Me-2-hexanone -> CH3C(OH)=CH2 + 2-butene
+    22042   | 4-Me-2-hexanone -> CH3C(OH)=CH2 + 1-butene
+    22051   | CH3CH(CH3)COCH(CH3)2 -> i-C3H7CO + i-C3H7
+    22061   | 2-Me-4-heptanone -> NI products
+    22071   | 3-Me-4-heptanone -> NI products
+    22081   | 2,2-Me-3-hexanone -> NI products
+    22091   | DIBK -> NI products
+    22101   | di-sec-butyl ketone -> NI products
+    22111   | di-t-butyl ketone -> NI products
+    22121   | 4-octanone -> NI products
+    22131   | n-C3H7COCH(CH3)2 -> NI products
+    22141   | n-C3H7COCH(CH3)2 -> i-C3H7COCH3 + C2H4
+    22151   | CH3COCH2C(CH3)3 -> NI products
+    22161   | di-sec-butyl ketone -> sec-C4H9COCH2CH3 + C2H4
+    23011   | CH3COCH=CH2 -> CH3 + C2H3CO
+    23021   | CH3CH2COCH=CH2 -> C2H5 + C2H3CO
+    24011   | c-C3H4O -> C2H4 + CO
+    24012   | c-C3H4O -> further products
+    24021   | c-C4H6O -> C2H4 + CH2=C=O
+    24022   | c-C4H6O -> c-C3H6 + CO
+    24031   | c-C5H8O -> 2 C2H4 + CO
+    24032   | c-C5H8O -> c-C4H8 + CO
+    24033   | c-C5H8O -> CH2=CHCH2CH2CHO
+    24041   | c-C6H10O -> 5-hexenal
+    24042   | c-C6H10O -> 1-pentene + CO
+    24051   | c-C7H12O -> 6-heptenal
+    24052   | c-C7H12O -> 1-hexene + CO
+    25011   | CH2(OH)COCH3 -> CH3CO + CH2(OH)
+    25021   | CH3COC2H4OH -> CH3 + COCH2CH2OH
+    25031   | CH3COCH(OH)CH3 -> CH3CO + CH3CHOH
+    25041   | CH3COC(CH3)2OH -> CH3 + (CH3)2C(OH)CO
+    25071   | CH3COCOOH -> CH3CHO + CO2
+    25081   | CH3COCH2C(CH3)2OH -> CH3COCH2 + CH3C(OH)CH3
+    26011   | CH2=C=O -> CO2 + CO + H2
+    26012   | CH3CH=C=O -> C2H4 + CO
+    31011   | CHOCHO -> 2 HO2 + 2 CO
+    31012   | CHOCHO -> CH2O + CO
+    31013   | Ald (mult)
+    31021   | CH3COCHO -> CH3CO + HCO
+    31031   | CH3COCOCH3 -> Products
+    33011   | CHOCH=CHCHO -> 3H-furan-2-one
+    33021   | CH3COCH=CHCHO -> 5Me-3H-2-furanone
+    33022   | CH3COCH=CHCHO -> CH3 + CHOCH=CHCO
+    33023   | CH3COCH=CHCHO -> CH3COCH=CH2 + CO
+    33031   | CH3COCH=CHCOCH3 -> CH3CO + CH=CHCOCH3
+    33041   | CHOCH=CHCH=CHCHO -> diformyl cyclobutene
+    34011   | pinonaldehyde -> R + CO + HO2
+    34021   | caronaldehyde -> R + CO + HO2
+    41011   | CH3ONO2 -> CH3O + NO2
+    41021   | C2H5ONO2 -> C2H5O + NO2
+    41031   | n-C3H7ONO2 -> C3H7O + NO2
+    41041   | 1-C4H9ONO2 -> 1-C4H9O + NO2
+    41051   | n-C5H11ONO2 -> n-C5H11O + NO2
+    41111   | CH3CHONO2CH3 -> CH3CHOCH3 + NO2
+    41121   | 2-C4H9ONO2 -> 2-C4H9O + NO2
+    41131   | 2-C5H11ONO2 -> 2-C5H11O + NO2
+    41141   | 3-C5H11ONO2 -> 3-C5H11O + NO2
+    41151   | C5H11ONO2 -> C5H11O + NO2
+    42011   | i-C4H9ONO2 -> i-C4H9O + NO2
+    42021   | C(CH3)3(ONO2) -> C(CH3)3(O.) + NO2
+    42031   | i-C5H11ONO2 -> i-C5H11O + NO2
+    44011   | c-C5H11ONO2 -> c-C5H11O + NO2
+    45011   | CH2(OH)CH2(ONO2) -> CH2(OH)CH2(O.) + NO2
+    45021   | C1(OH)NO3 -> C1(OH)O + NO2
+    45031   | R(OH)NO3 -> R(OH)O + NO2
+    45041   | iR(OH)NO3 -> iR(OH)O + NO2
+    45051   | tR(OH)NO3 -> tR(OH)O + NO2
+    46011   | CH3NO2 -> CH3 + NO2
+    46012   | RNO2 -> alkene + HONO
+    46021   | C2H5NO2 -> C2H5 + NO2
+    46022   | C2H5NO2 -> C2H4 + HONO
+    47011   | CH3(OONO2) -> CH3(OO) + NO2
+    48011   | CH3CO(OONO2) -> CH3CO(OO) + NO2
+    48012   | CH3CO(OONO2) -> CH3CO(O) + NO3
+    48021   | CH3CH2CO(OONO2) -> CH3CH2CO(OO) + NO2
+    48022   | CH3CH2CO(OONO2) -> CH3CH2CO(O) + NO3
+    48031   | PAN -> RCO(OO) + NO2
+    48032   | PAN -> RCO(O) + NO3
+    51011   | CH3CH(NO3)CH2NO3 -> CH3CH(NO3)CH2O + NO2
+    51021   | C2H5CH(NO3)CH2NO3 -> C2H5CH(NO3)CH2O + NO2
+    51031   | CH3CH(NO3)CH(NO3)CH3 -> RO. + NO2
+    53011   | CH2(NO3)CH=CHCH2NO3 -> RO. + NO2
+    53021   | CH2=CHCH(NO3)CH2NO3 -> CH2=CHCH(NO3)CH2O + NO2
+    61011   | CH3OOH -> CH3O + OH
+    62011   | (CH3)3COOH -> (CH3)3CO + OH
+    65011   | HOCH2OOH -> HOCH2O. + OH
+    66011   | CH3CO(OOH) -> Products
+    71011   | CH2OO -> HCHO + O(3P)
+    71021   | CH3CHOO -> CH3CHO + O(3P)
+    71022   | synCH3CHOO -> CH3CHO + O(3P)
+    71023   | antiCH3CHOO -> CH3CHO + O(3P)
+    71031   | C2H5CHOO -> C2H5CHO + O(3P)
+    72011   | (CH3)2COO -> CH3COCH3 + O(3P)
+    81011   | CH3COCH2(ONO2) -> CH3COCH2(O.) + NO2
+    81021   | C2H5COCH2NO3 -> C2H5COCH2O + NO2
+    81031   | CH3COCH(NO3)CH3 -> CH3COCH(O.)CH3 + NO2
+    81111   | CH3COCH2CH2CH(OOH)CH3 -> RO. + OH
+    81121   | oxohexyl-hydroperoxide -> RO. + OH
+    82011   | genCH3CHO(poly)
+    82021   | genC2H5CHO(poly)
+    82031   | C4nALDpoly
+    82041   | C5nALDpoly
+    82051   | C6nALDpoly
+    82061   | C7nALDpoly
+    82071   | nALDpoly(C>7)
+    82181   | genluALD(poly)
+    82121   | genbMeuAld(poly)
+    82131   | genaMeuAld(poly)
+    82211   | genluuALD(poly)
+    83011   | genC2H5CHO(OHpoly)
+    83021   | C4nALDOHpoly
+    83031   | C5nALDOHpoly
+    83041   | C6nALDOHpoly
+    83051   | C7nALDOHpoly
+    83061   | nALDOHpoly(C>7)
+    83111   | genluALD(OHpoly)
+    83121   | genbMeuAldOH(poly)
+    83131   | genaMeuAldOH(poly)
+    83211   | genluuALD(OHpoly)
+    84011   | genC3cKet
+    84021   | genC4cKet
+    84031   | genC5cKet
+    84041   | genC6cKet
+    84051   | genC7cKet
+    85011   | genuKet(poly)
+    86011   | genKete(poly)
+    88011   | Ald (poly)
+    88111   | uDICARaa(poly)
+    88121   | uDICARak(poly)
+# Edwards et al. MCM extensions
+     1001   | HOBr -> OH + Br
+     1002   | BrO -> Br + O
+     1003   | Br2 -> Br + Br
+     1004   | BrONO2 -> Br + NO3
+     1005   | BrONO2 -> BrO + NO2
+     1006   | ClONO2 -> Cl + NO3
+     1007   | ClONO2 -> ClO + NO2
+     1008   | Cl2 -> Cl + Cl
+     1009   | ClNO2 -> Cl + NO2
+     1010   | ClO -> Cl + O(1D)
+     1011   | ClO -> Cl + O(3P)
+     1012   | HCl -> H + Cl
+     1013   | BrNO2 -> Br + NO2
+     1100   | IO -> I + O
+     1101   | HOI -> I + OH
+     1102   | OIO -> I + O2
