@@ -24,6 +24,7 @@ export setrxns,
 
 # Include private functions
 include("setrxns.jl")
+include("generate_wiki.jl")
 
 """
     setrxns(tuvdir::String; inputfiles::Union{String,Vector{String}}="", setflags::Int64=-1)
@@ -88,7 +89,7 @@ reaction listed at the beginning of each template line and written to files spec
 by kwarg `wikioutput`. The table `collength` can be specifief with a kwarg, for nicer
 md file formatting. The `MCMversion` needs to be specified for every wiki template.
 """
-function generate_wiki(tuvdir::String; wikitemplates::Union{String, Vector{String}}="WIKItemplate.md",
+function generate_wiki(tuvdir::String; wikitemplates::Union{String, Vector{String}}="",
   wikioutput::Union{String, Vector{String}}="WIKI.md", collength::Union{Int64,Vector{Int64}}=10,
   MCMversion::Union{Int64,Vector{Int64}}=4)
   # Save current directory
