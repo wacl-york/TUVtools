@@ -19,10 +19,12 @@ using filehandling
 using Printf
 
 export setrxns,
-       generate_incfiles
+       generate_incfiles,
+       generate_wiki
 
 # Include private functions
 include("setrxns.jl")
+include("generate_wiki.jl")
 
 """
     setrxns(tuvdir::String; inputfiles::Union{String,Vector{String}}="", setflags::Int64=-1)
@@ -57,6 +59,11 @@ function setrxns(tuvdir::String; inputfiles::Union{String,Vector{String}}="",
 end #function setrxns
 
 
+"""
+    generate_incfiles(tuvdir::String)
+
+Generate include files to link TUV in directory `tuvdir` to the box model DSMACC.
+"""
 function generate_incfiles(tuvdir::String)
 
   # Save current directory
@@ -71,5 +78,33 @@ function generate_incfiles(tuvdir::String)
   # Go back to original directory
   cd(currdir)
 end
+
+
+"""
+    generate_wiki(tuvdir::String, kwargs)
+
+Generate markdown files from templates specified kwarg `wikitemplates`, where
+reactions numbers from TUV in `tuvdir` and in MCM/GECKO-A are listed for every
+reaction listed at the beginning of each template line and written to files specified
+by kwarg `wikioutput`. The table `MCMcollength` can be specifief with a kwarg, for nicer
+md file formatting. The `MCMversion` needs to be specified for every wiki template.
+"""
+function generate_wiki(tuvdir::String; wikitemplates::Union{String, Vector{String}}="",
+  wikioutput::Union{String, Vector{String}}="WIKI.md", MCMcollength::Union{Int64,Vector{Int64}}=10,
+  MCMversion::Union{Int64,Vector{Int64}}=4, parinput::String="",
+  paroutput::String="../MCM-Photolysis-Parameters.md")
+  # Save current directory
+  currdir = pwd()
+  # Find files related to photolysis mechanism
+  rxnfiles, callfiles, tuvdir = getfiles(tuvdir)
+  # get list of reactions in order for input files
+  rxnlist = generate_rxns(rxnfiles, callfiles)
+
+  # Auto-generate inc files for TUV_DSMACC
+  write_wiki(rxnlist, tuvdir, wikitemplates, wikioutput, MCMcollength, MCMversion, currdir)
+  write_params(parinput, paroutput, currdir)
+  # Go back to original directory
+  cd(currdir)
+end #function generate_wiki
 
 end # module TUVtools
