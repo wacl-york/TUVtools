@@ -13,8 +13,8 @@ where j is in s<sup>-1</sup>. For other ozone columns `l` is redefined to:
 where l, l<sub>a0</sub>, l<sub>b0</sub>, l<sub>c0</sub> are in
 s<sup>-1</sup> and l<sub>b1</sub>, l<sub>c1</sub> are in DU.
 
-Download the parameters as [formatted text file](github.com/pb866) or
-[csv file](github.com/pb866).
+Download the parameters as [formatted text file](https://github.com/pb866/TUV5.2.x/wiki/data/parameters.dat) or
+[csv file](https://github.com/pb866/TUV5.2.x/wiki/data/parameters.csv).
 
 
 MCM/GECKO-A | TUV |        l<sub>a0</sub>         |        l<sub>b0</sub>         | l<sub>b1</sub> |        l<sub>c0</sub>         | l<sub>c1</sub> |        l(350DU)        |      m      |      n      | TUV label
