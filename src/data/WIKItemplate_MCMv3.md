@@ -111,6 +111,7 @@ OIO -> I + O2
 ## Additional explanations
 
 <sup>(1)</sup> J(56): NOA photolyses to CH<sub>3</sub>COCH<sub>2</sub>O<sup>•</sup>
- and NO<sub>2</sub> as only products in the MCMv3.3.1 with a quantum yield of 0.9.
- In the MCMv3.2 an additional channel J(57) is assumed leading to
- CH<sub>3</sub>CO<sup>•</sup>, HCHO, and NO<sub>2</sub> with a branching of 0.75:0.25 between J(56) and J(57), respectively.
+and NO<sub>2</sub> as only products in the MCMv3.3.1 with a quantum yield of 0.9.
+In the MCMv3.2 an additional channel J(57) is assumed leading to
+CH<sub>3</sub>CO<sup>•</sup>, HCHO, and NO<sub>2</sub> with a branching of
+0.75:0.25 between J(56) and J(57), respectively.
