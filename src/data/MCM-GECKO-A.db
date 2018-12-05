@@ -93,11 +93,10 @@ MCM/GECKO-A | TUVlabel
     22091   | DIBK -> NI products
     22101   | di-sec-butyl ketone -> NI products
     22111   | di-t-butyl ketone -> NI products
-    22121   | 4-octanone -> NI products
-    22131   | n-C3H7COCH(CH3)2 -> NI products
-    22141   | n-C3H7COCH(CH3)2 -> i-C3H7COCH3 + C2H4
-    22151   | CH3COCH2C(CH3)3 -> NI products
-    22161   | di-sec-butyl ketone -> sec-C4H9COCH2CH3 + C2H4
+    22121   | n-C3H7COCH(CH3)2 -> NI products
+    22131   | n-C3H7COCH(CH3)2 -> i-C3H7COCH3 + C2H4
+    22141   | CH3COCH2C(CH3)3 -> NI products
+    22151   | di-sec-butyl ketone -> sec-C4H9COCH2CH3 + C2H4
     23011   | CH3COCH=CH2 -> CH3 + C2H3CO
     23021   | CH3CH2COCH=CH2 -> C2H5 + C2H3CO
     24011   | c-C3H4O -> C2H4 + CO
