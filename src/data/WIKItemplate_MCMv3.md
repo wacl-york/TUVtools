@@ -7,6 +7,7 @@ and in TUV 5.2.x for the following compound classes:
 - [Carbonyl compounds](#carbonyl-compounds)
 - [Organic hydroperoxides](#organic-hydroperoxides)
 - [Organic nitrates](#organic-nitrates)
+- [Halogen extension](#edwards-et-al-mcm-extensions)
 
 Please ensure that `vers` is set to `2` in the `params` file in TUV.
 This should set all cross section and quantum yield options correctly to
@@ -29,7 +30,7 @@ NO3 -> NO2 + O(3P)
 HNO2 -> OH + NO
 HNO3 -> OH + NO2
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmv3x-and-tuv-522)
 
 
 ## Carbonyl compounds
@@ -56,7 +57,7 @@ CHOCHO -> 2 HO2 + 2 CO
 CH3COCHO -> CH3CO + HCO
 CH3COCOCH3 -> Products
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmv3x-and-tuv-522)
 
 
 ## Organic hydroperoxides
@@ -65,7 +66,7 @@ MCM     | TUV | TUV reaction label
 -------:|----:|:------------------
 CH3OOH -> CH3O + OH
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmv3x-and-tuv-522)
 
 
 ## Organic nitrates
@@ -79,7 +80,7 @@ CH3CHONO2CH3 -> CH3CHOCH3 + NO2
 C(CH3)3(ONO2) -> C(CH3)3(O.) + NO2
 CH3COCH2(ONO2) -> CH3COCH2(O.) + NO2[<sup>(1)</sup>](#additional-explanations)
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmv3x-and-tuv-522)
 
 
 ## Edwards et al. MCM extensions
@@ -105,7 +106,7 @@ HOI -> I + OH
 OIO -> I + O2
 
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmv3x-and-tuv-522)
 
 
 ## Additional explanations

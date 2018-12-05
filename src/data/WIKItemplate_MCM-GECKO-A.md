@@ -24,7 +24,7 @@ and in TUV 5.2.x for the following compound classes:
 - [Alkyl hydroperoxides](#alkyl-hydroperoxides)
 - [Criegee intermediates](#criegee-intermediates)
 - [Polyfunctionals](#polyfunctional-chromophores)
-- [Halogens](#edwards-et-al-mcm-halogen-extensions)
+- [Halogens](#halogen-extensions)
 
 Please ensure that `vers` is set to `2` in the `params` file in TUV.
 This should set all cross section and quantum yield options correctly to
@@ -51,7 +51,7 @@ HNO3 -> OH + NO2
 HNO4 -> HO2 + NO2
 HNO4 -> OH + NO3
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmgecko-a-and-tuv-522)
 
 
 ## Linear aldehydes
@@ -70,7 +70,7 @@ n-C5H11CHO -> C5H11 + CHO
 n-C6H13CHO -> C6H13 + CHO
 n-C7H15CHO -> C7H15 + CHO
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmgecko-a-and-tuv-522)
 
 
 ## Branched aldehydes
@@ -87,7 +87,7 @@ C4H9CH(C2H5)CHO -> C7H15 + CHO
 tALD -> products
 neoC5H11CHO -> neoC5H11 + CHO
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmgecko-a-and-tuv-522)
 
 
 ## Unsaturated aldehydes
@@ -119,7 +119,7 @@ luALD -> NI products
 luALD -> alkene + CO
 luALD -> acyl + H
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmgecko-a-and-tuv-522)
 
 
 ## Substituted aldehydes
@@ -137,7 +137,7 @@ C8nALDOH -> NI products
 intAldOH -> R + CHO
 Glycidaldehyde -> oxyranyl radical + CHO
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmgecko-a-and-tuv-522)
 
 
 ## Unbranched ketones
@@ -160,7 +160,7 @@ lKET5 -> products
 4-heptanone -> NI products
 4-octanone -> NI products
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmgecko-a-and-tuv-522)
 
 
 ## Branched ketones
@@ -187,7 +187,7 @@ n-C3H7COCH(CH3)2 -> i-C3H7COCH3 + C2H4
 CH3COCH2C(CH3)3 -> NI products
 di-sec-butyl ketone -> sec-C4H9COCH2CH3 + C2H4
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmgecko-a-and-tuv-522)
 
 
 ## Unsaturated ketones
@@ -197,7 +197,7 @@ MCM/GECKO-A | TUV | TUV reaction label
 CH3COCH=CH2 -> CH3 + C2H3CO
 CH3CH2COCH=CH2 -> C2H5 + C2H3CO
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmgecko-a-and-tuv-522)
 
 
 ## Cyclic ketones
@@ -216,7 +216,7 @@ c-C6H10O -> 1-pentene + CO
 c-C7H12O -> 6-heptenal
 c-C7H12O -> 1-hexene + CO
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmgecko-a-and-tuv-522)
 
 
 ## Substituted ketones
@@ -230,7 +230,7 @@ CH3COC(CH3)2OH -> CH3 + (CH3)2C(OH)CO
 CH3COCOOH -> CH3CHO + CO2
 CH3COCH2C(CH3)2OH -> CH3COCH2 + CH3C(OH)CH3
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmgecko-a-and-tuv-522)
 
 
 ## Ketenes
@@ -240,7 +240,7 @@ MCM/GECKO-A | TUV | TUV reaction label
 CH2=C=O -> CO2 + CO + H2
 CH3CH=C=O -> C2H4 + CO
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmgecko-a-and-tuv-522)
 
 
 ## Dicarbonyls
@@ -261,7 +261,7 @@ CHOCH=CHCH=CHCHO -> diformyl cyclobutene
 pinonaldehyde -> R + CO + HO2
 caronaldehyde -> R + CO + HO2
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmgecko-a-and-tuv-522)
 
 
 ## Terminal linear alkyl nitrates
@@ -274,7 +274,7 @@ n-C3H7ONO2 -> C3H7O + NO2
 1-C4H9ONO2 -> 1-C4H9O + NO2
 n-C5H11ONO2 -> n-C5H11O + NO2
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmgecko-a-and-tuv-522)
 
 
 ## Internal linear alkyl nitrates
@@ -287,7 +287,7 @@ CH3CHONO2CH3 -> CH3CHOCH3 + NO2
 3-C5H11ONO2 -> 3-C5H11O + NO2
 C5H11ONO2 -> C5H11O + NO2
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmgecko-a-and-tuv-522)
 
 
 ## Branched alkyl nitrates
@@ -299,7 +299,7 @@ C(CH3)3(ONO2) -> C(CH3)3(O.) + NO2
 i-C5H11ONO2 -> i-C5H11O + NO2
 c-C5H11ONO2 -> c-C5H11O + NO2
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmgecko-a-and-tuv-522)
 
 
 ## Substituted alkyl nitrates
@@ -312,7 +312,7 @@ R(OH)NO3 -> R(OH)O + NO2
 iR(OH)NO3 -> iR(OH)O + NO2
 tR(OH)NO3 -> tR(OH)O + NO2
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmgecko-a-and-tuv-522)
 
 
 ## Further nitrogen compounds
@@ -331,7 +331,7 @@ CH3CH2CO(OONO2) -> CH3CH2CO(O) + NO3
 PAN -> RCO(OO) + NO2
 PAN -> RCO(O) + NO3
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmgecko-a-and-tuv-522)
 
 
 ## Alkyl dinitrates
@@ -344,7 +344,7 @@ CH3CH(NO3)CH(NO3)CH3 -> RO. + NO2
 CH2(NO3)CH=CHCH2NO3 -> RO. + NO2
 CH2=CHCH(NO3)CH2NO3 -> CH2=CHCH(NO3)CH2O + NO2
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmgecko-a-and-tuv-522)
 
 
 ## Alkyl hydroperoxides
@@ -356,7 +356,7 @@ CH3OOH -> CH3O + OH
 HOCH2OOH -> HOCH2O. + OH
 CH3CO(OOH) -> Products
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmgecko-a-and-tuv-522)
 
 
 ## Criegee intermediates
@@ -373,7 +373,7 @@ antiCH3CHOO -> CH3CHO + O(3P)
 C2H5CHOO -> C2H5CHO + O(3P)
 (CH3)2COO -> CH3COCH3 + O(3P)
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmgecko-a-and-tuv-522)
 
 
 ## Polyfunctional chromophores
@@ -417,10 +417,10 @@ Ald (poly)
 uDICARaa(poly)
 uDICARak(poly)
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmgecko-a-and-tuv-522)
 
 
-## Edwards et al. MCM halogen extensions
+## Halogen extensions
 
 MCM/GECKO-A | TUV | TUV reaction label
 -----------:|----:|:------------------
@@ -441,4 +441,4 @@ IO -> I + O
 HOI -> I + OH
 OIO -> I + O2
 
-[Back to the top](#photolysis-reaction-numbers-in-different-model-frameworks)
+[Back to the top](#photolysis-reaction-numbers-in-mcmgecko-a-and-tuv-522)

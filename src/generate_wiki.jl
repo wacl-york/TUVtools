@@ -114,6 +114,8 @@ function write_params(ifile, ofile, pwd)
         rpad(lc1,16),lp, o,
         param[6][i], param[13][i], param[7][i], param[14][i], param[end][i])
     end # loop over reactiojns
+    # Include back-to-top link at the bottom of the file
+    println(f, "\n[back to top]($(splitext(basename(ofile))[1]))")
     # Inform about number of reactions on screen
     println("MCM/GECKO-A parameters for $(length(param[1])) reactions ",
       "written to $(basename(ofile)).")
