@@ -48,6 +48,6 @@ MCMv3.3.1 | TUVlabel
   1011    | ClO -> Cl + O(3P)
   1012    | HCl -> H + Cl
   1013    | BrNO2 -> Br + NO2
-  1100    | IO -> I + O
+  1100    | IO -> I + O(3P)
   1101    | HOI -> I + OH
   1102    | OIO -> I + O2

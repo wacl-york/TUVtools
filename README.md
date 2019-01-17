@@ -141,6 +141,11 @@ auto-generated markdown file use kwarg `paroutput`.
 Version history
 ===============
 
+Version 0.1.1
+-------------
+- Fix #5 (BoundsError)
+- Fix name of O(3P) in database files and wiki pages
+
 Version 0.1.0
 -------------
 - New function `setrxns` to auto-generate TUV input files
