@@ -49,6 +49,6 @@ MCMv3.2 | SF   | TUVlabel
  1011   | 1.00 | ClO -> Cl + O(3P)
  1012   | 1.00 | HCl -> H + Cl
  1013   | 1.00 | BrNO2 -> Br + NO2
- 1100   | 1.00 | IO -> I + O
+ 1100   | 1.00 | IO -> I + O(3P)
  1101   | 1.00 | HOI -> I + OH
  1102   | 1.00 | OIO -> I + O2

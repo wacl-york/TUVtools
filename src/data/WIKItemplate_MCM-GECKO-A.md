@@ -33,7 +33,7 @@ options are check correctly for a given species by checking the 2. parameter
 in xsvers or qyvers, respectively. The index compared to the log message
 should yield in the option detailed in the MCM/GECKO-A protocol.
 
-See also [schematics of the new protocol](Decision%20tree) or return to [start page](Home).
+See also [schematics of the new protocol](Decision-tree) or return to [start page](Home).
 
 
 ## Inorganic species
@@ -437,7 +437,7 @@ ClO -> Cl + O(1D)
 ClO -> Cl + O(3P)
 HCl -> H + Cl
 BrNO2 -> Br + NO2
-IO -> I + O
+IO -> I + O(3P)
 HOI -> I + OH
 OIO -> I + O2
 
