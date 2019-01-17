@@ -43,7 +43,7 @@ Additional flags to use with the original TUV version will be introduced in the 
 
 ### Function setrxns
 
-Auto-generates The reaction part of the TUV input files from the reaction labels
+Auto-generates the reaction part of the TUV input files from the reaction labels
 defined in the rxn files/subroutines. Options exist to reset flags.
 
 
