@@ -101,7 +101,7 @@ ClO -> Cl + O(1D)
 ClO -> Cl + O(3P)
 HCl -> H + Cl
 BrNO2 -> Br + NO2
-IO -> I + O
+IO -> I + O(3P)
 HOI -> I + OH
 OIO -> I + O2
 

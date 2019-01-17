@@ -138,8 +138,6 @@ function write_rxns(filelist, tuvdir, rxnlist, setflags)
   elseif filelist isa String
     filelist = [filelist]
   end
-  # Set flags, if not default
-  flags = set_flags(setflags, rxnlist)
   # Loop over files
   for file in filelist
     # Read input file, and find mechanism section and number of output reactions
@@ -149,7 +147,7 @@ function write_rxns(filelist, tuvdir, rxnlist, setflags)
     inmj   = findfirst(occursin.("nmj", lines))
 
     # Save flags, if default
-    flags = set_flags(setflags, rxnlist, istart, iend, lines)
+    flags = set_flags(setflags, rxnlist, istart, iend, lines, file)
 
     # Auto-generate output
     lines[inmj] = @sprintf("%s%3d", lines[inmj][1:end-3], length(findall(flags.=='T')))
@@ -178,20 +176,20 @@ The following `setflags` options exist (default: use from original input file):
 - `3`: Set reactions used in MCMv3.3.1 `T`, all other to `F`
 """
 function set_flags(setflags, rxnlist, istart::Int64=0, iend::Int64=0,
-                  lines::Vector{String}=String[])
+                  lines::Vector{String}=String[], scen::String="")
   # Use existing flags
   if setflags < 0
     flags = [line[1]  for line in lines[istart+1:iend-1]]
     if length(flags) < length(rxnlist)
-      [push!(flags, 'T') for i = 1:1+length(rxnlist) - length(flags)]
-      println("\033[95mWarning! Less flags in input file defined ",
+      println("\033[95mWarning! Less flags in input file $scen defined ",
         "than needed for current mechanism.\n\33[0m",
-        "Last $(1+length(rxnlist) - length(flags)) flags set to true.")
+        "Last $(length(rxnlist) - length(flags)) flags set to true.")
+      [push!(flags, 'T') for i = 1:length(rxnlist) - length(flags)]
     elseif length(flags) > length(rxnlist)
-      println("\033[95mWarning! More flags in input file defined ",
+      println("\033[95mWarning! More flags in input file $scen defined ",
         "than needed for current mechanism.\n\33[0m",
-        "Last $(1+length(rxnlist) - length(flags)) flags ignored.")
-      deleteat!(flags, 1+length(rxnlist) - length(flags):length(rxnlist))
+        "Last $(length(flags) - length(rxnlist)) flags ignored.")
+      deleteat!(flags, 1+length(rxnlist):length(flags))
     end
     return flags
   end
