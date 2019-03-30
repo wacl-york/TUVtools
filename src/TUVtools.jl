@@ -11,11 +11,16 @@ the original TUV versions as well.
   files with the subroutine calls. Options to set all flags to T/F, set flags
   used in the MCMv3.3.1 or MCM/GECKO-A to T other reactions to false, or leave
   flags untouched.
+- `generate_incfiles`: Generate .inc files needed to link TUV photolysis reaction
+  numbers to MCM photolysis reaction numbers.
+- `generate_wiki`: Generate wiki files with the TUV and MCM reaction numbers based
+  on the TUV input files and a database file with the TUV reaction label and the
+  MCM reaction number saved in src/data.
 """
 module TUVtools
 
 # Load packages
-using filehandling
+import filehandling; const fh = filehandling
 using Printf
 
 export setrxns,

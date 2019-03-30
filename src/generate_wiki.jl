@@ -13,7 +13,7 @@ function write_wiki(rxnlist, tuvdir, ifile, ofile, len, DB, currdir)
   ifile, ofile, len, db = init_wikifiles(ifile, ofile, len, DB, currdir)
 
   for i = 1:length(ifile)
-    wiki = readfile(ifile[i])
+    wiki = fh.readfile(ifile[i])
     counter = 0
     for (j, rxn) = enumerate(unique(db[i][:label]))
       n = findfirst(startswith.(wiki,rxn))
@@ -21,7 +21,7 @@ function write_wiki(rxnlist, tuvdir, ifile, ofile, len, DB, currdir)
         wiki[n] = @sprintf("%s | %3d | %s", rpad("J($(db[i][:number][j]))",len[i]),
           findfirst(rxnlist.==rxn), wiki[n])
         counter += 1
-      catch;
+      catch
       end
     end # loop over reactions
     open(ofile[i], "w") do f
@@ -43,17 +43,16 @@ of function generate_wiki.
 function init_wikifiles(ifile, ofile, len, DB, currdir)
   collength = Int64[]; db = []
   # Read MCM reaction numbers saved in the data files for every version
-  mcm3 = read_data(joinpath(@__DIR__, "data/MCMv331.db"), sep = "|",
+  mcm3 = fh.loadfile("data/MCMv331.db", dir = @__DIR__, sep = "|",
   headerskip = 1, colnames = ["number", "label"])
-  mcm4 = read_data(joinpath(@__DIR__, "data/MCM-GECKO-A.db"), sep = "|",
+  mcm4 = fh.loadfile("data/MCM-GECKO-A.db", dir = @__DIR__, sep = "|",
   headerskip = 1, colnames = ["number", "label"])
   database = [mcm3, mcm4]
   # Make sure, all kwargs are vectors
   if ifile isa String  ifile = [ifile]  end
   if ofile isa String  ofile = [ofile]  end
   if length(ifile) ≠ length(ofile)
-    println("\033[95mError! Different number of input and output files specified.")
-    println("Julia stopped.\033[0m")
+    println("\033[95mError! Different number of input and output files specified.\033[0m")
   end
   if len isa Number
     [push!(collength, len) for i = 1:length(ifile)]
@@ -87,14 +86,14 @@ function write_params(ifile, ofile, pwd)
   if !isabspath(ifile)  ifile = joinpath(pwd, ifile)  end
   if !isabspath(ofile)  ofile = joinpath(pwd, ofile)  end
   # Read header of md file
-  header = readfile(joinpath(@__DIR__, "data/params_header.md"))
+  header = fh.readfile("data/params_header.md", dir = @__DIR__)
 
   # Open output file
   open(ofile,"w") do f
     # print header
     [println(f, line) for line in header]
     # Read parameter file from MCMphotolysis
-    param = read_data(ifile, sep = ";", header = 1)
+    param = fh.loadfile(ifile, sep = ";", header = 1)
      # Loop over reactions
     for i = 1:length(param[1])
       # Retrieve and format l parameters and errors
