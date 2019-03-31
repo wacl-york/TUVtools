@@ -82,7 +82,6 @@ function findrxnlabel(filelist)
         end
       end
       push!(rxns, jlabel)
-      @show(jlabel)
     end
     # rxns = [match(r"(?<=\"|\').*(?=\"|\')"i, rxn).match for rxn in lines[irxns]]
 
@@ -213,12 +212,13 @@ function set_flags(setflags, rxnlist, istart::Int64=0, iend::Int64=0,
     flags .= 'T'
   elseif setflags > 1
     if setflags == 2
-      mcm = fh.loadfile("data/MCM-GECKO-A.db", dir = @__DIR__, sep = "|",
+      mcm = fh.loadfile("../data/MCM-GECKO-A.db", dir = @__DIR__, sep = "|",
       headerskip = 1, colnames = ["number", "label"])
     elseif setflags == 3
-      mcm = fh.loadfile("data/MCMv331.db", dir = @__DIR__, sep = "|",
+      mcm = fh.loadfile("../data/MCMv331.db", dir = @__DIR__, sep = "|",
       headerskip = 1, colnames = ["number", "label"])
     end
+    mcm[:label] = strip.(mcm[:label])
     flags = Vector{Char}(undef, length(rxnlist))
     flags .= 'F'
     fail = String[]
@@ -250,12 +250,15 @@ to link TUV to it and save them in the main TUV folder.
 """
 function write_incfiles(rxnlist, tuvdir)
   cd(tuvdir)
-  mcm32 = fh.loadfile("data/MCMv32.db", dir = @__DIR__, sep = "|",
+  mcm32 = fh.loadfile("../data/MCMv32.db", dir = @__DIR__, sep = "|",
   headerskip = 1, colnames = ["number", "SF", "label"])
-  mcm33 = fh.loadfile("data/MCMv331.db", dir = @__DIR__, sep = "|",
+  mcm33 = fh.loadfile("../data/MCMv331.db", dir = @__DIR__, sep = "|",
   headerskip = 1, colnames = ["number", "label"])
-  mcm4 = fh.loadfile("data/MCM-GECKO-A.db", dir = @__DIR__, sep = "|",
+  mcm4 = fh.loadfile("../data/MCM-GECKO-A.db", dir = @__DIR__, sep = "|",
   headerskip = 1, colnames = ["number", "label"])
+  mcm32[:label] = strip.(mcm32[:label])
+  mcm33[:label] = strip.(mcm33[:label])
+  mcm4[:label]  = strip.(mcm4[:label])
   db = [mcm32, mcm33, mcm4]
   for (i, file) in enumerate(["MCMv32.inc", "MCMv331.inc", "MCM-GECKO-A.inc"])
     open(file, "w") do f

@@ -43,9 +43,9 @@ of function generate_wiki.
 function init_wikifiles(ifile, ofile, len, DB, currdir)
   collength = Int64[]; db = []
   # Read MCM reaction numbers saved in the data files for every version
-  mcm3 = fh.loadfile("data/MCMv331.db", dir = @__DIR__, sep = "|",
+  mcm3 = fh.loadfile("../data/MCMv331.db", dir = @__DIR__, sep = "|",
   headerskip = 1, colnames = ["number", "label"])
-  mcm4 = fh.loadfile("data/MCM-GECKO-A.db", dir = @__DIR__, sep = "|",
+  mcm4 = fh.loadfile("../data/MCM-GECKO-A.db", dir = @__DIR__, sep = "|",
   headerskip = 1, colnames = ["number", "label"])
   database = [mcm3, mcm4]
   # Make sure, all kwargs are vectors
@@ -86,7 +86,7 @@ function write_params(ifile, ofile, pwd)
   if !isabspath(ifile)  ifile = joinpath(pwd, ifile)  end
   if !isabspath(ofile)  ofile = joinpath(pwd, ofile)  end
   # Read header of md file
-  header = fh.readfile("data/params_header.md", dir = @__DIR__)
+  header = fh.readfile("../data/params_header.md", dir = @__DIR__)
 
   # Open output file
   open(ofile,"w") do f

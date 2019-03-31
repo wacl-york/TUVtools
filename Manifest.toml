@@ -201,8 +201,8 @@ version = "0.5.8"
 
 [[filehandling]]
 deps = ["DataFrames", "Dates"]
-git-tree-sha1 = "bdc21da1f995fcdd4fd112ff8fb5ad19c79aa97c"
+git-tree-sha1 = "07a5343140bd792153f32b7cf6bee09c66c5099b"
 repo-rev = "master"
 repo-url = "https://github.com/pb866/filehandling.git"
 uuid = "4b8ed5e0-8069-11e8-094b-3f5425e6acdd"
-version = "1.0.0"
+version = "1.1.0"
