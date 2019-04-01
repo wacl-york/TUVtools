@@ -145,6 +145,14 @@ auto-generated markdown file use kwarg `paroutput`.
 Version history
 ===============
 
+Version 0.1.2
+-------------
+- Use `import` for filehandling (as `fh`) rather than `using`
+- Add support for line breaks in j labels in the reaction files
+- Move `data` folder from `src` to main folder
+- New kwarg `wikidir` to specify the directory of the wiki templates
+- Bug fixes
+
 Version 0.1.1
 -------------
 - Fix #5 (BoundsError)
