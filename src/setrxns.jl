@@ -20,7 +20,7 @@ end #function getfiles
     generate_rxns(rxnfiles, callfiles)
 
 From the `rxnfiles` with the reaction subroutines and the `callfiles` with the
-subroutine call of the reaction routines, generate a vector of strings holding
+subroutine calls of the reaction routines, generate a vector of strings holding
 all reaction labels in the order needed for the input files and return it.
 """
 function generate_rxns(rxnfiles, callfiles)
@@ -53,7 +53,7 @@ end
 
 Use regex search to find all subroutine names and reaction labels in the `filelist`
 with the rxn files and return a dictionary with routine names as keys and the
-associated reaction labels in order as entries.
+associated ordered reaction labels as entries.
 """
 function findrxnlabel(filelist)
   # Initialise dictionary with subroutines and their associated reactions
@@ -172,12 +172,13 @@ end #function write_rxns
 
 
 """
-    set_flags(setflags, rxnlist, istart::Int64=0, iend::Int64=0, lines::Vector{String}=String[])
+    set_flags(setflags, rxnlist, istart::Int64=0, iend::Int64=0, lines::Vector{String}=String[], scen::String="")
 
-Set flags according to `setflags` option for reactios in the `rxnlist`.
+Set flags according to `setflags` option for reactions in the `rxnlist`.
 For the default `setflags` option to leave flags unchagend, additionally the file
-content of the current TUV file `lines`, and the beginning `istartz` and end index
-`iend` of the mechanism section is needed.
+content of the current TUV file `lines`, and the beginning `istart` and end index
+`iend` of the mechanism section is needed. Use the filename `scen` of the current
+input file for details of error messages.
 
 The following `setflags` options exist (default: use from original input file):
 - `0`: Set all flags to `F`
