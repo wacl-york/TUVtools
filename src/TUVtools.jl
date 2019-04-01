@@ -11,11 +11,16 @@ the original TUV versions as well.
   files with the subroutine calls. Options to set all flags to T/F, set flags
   used in the MCMv3.3.1 or MCM/GECKO-A to T other reactions to false, or leave
   flags untouched.
+- `generate_incfiles`: Generate .inc files needed to link TUV photolysis reaction
+  numbers to MCM photolysis reaction numbers.
+- `generate_wiki`: Generate wiki files with the TUV and MCM reaction numbers based
+  on the TUV input files and a database file with the TUV reaction label and the
+  MCM reaction number saved in src/data.
 """
 module TUVtools
 
 # Load packages
-using filehandling
+import filehandling; const fh = filehandling
 using Printf
 
 export setrxns,
@@ -31,9 +36,10 @@ include("generate_wiki.jl")
 
 Auto-generate input files for TUV (found in folder `tuvdir`).
 
-By default all input files in the `INPUTS` folder are generated, but you can
-specify to generate only certain inputs files using the keyword argument `inputfiles`
-and giving a `Vector` of `String`s with the file names, you want to generate.
+By default all input files in the `INPUTS` folder are regenerated with an updated
+photolysis mechanism section, but you can specify to generate only certain input
+files using the keyword argument `inputfiles` and giving it a `Vector` of `String`s
+with the file names, you want to generate.
 Files already have to exist, and only the reaction section is auto-generated.
 
 You have options to reset flags (by default, flags are used as defined in the original input file):
@@ -83,16 +89,21 @@ end
 """
     generate_wiki(tuvdir::String, kwargs)
 
-Generate markdown files from templates specified kwarg `wikitemplates`, where
-reactions numbers from TUV in `tuvdir` and in MCM/GECKO-A are listed for every
-reaction listed at the beginning of each template line and written to files specified
-by kwarg `wikioutput`. The table `MCMcollength` can be specifief with a kwarg, for nicer
+Generate markdown files from templates named `wikitemplates` in folder `wikidir`,
+where reactions numbers from TUV in `tuvdir` and in MCM/GECKO-A are listed for every
+reaction listed at the beginning of each template line and written to files named
+`wikioutput`. In the output table, column width `MCMcollength` can be specified for nicer
 md file formatting. The `MCMversion` needs to be specified for every wiki template.
+If the parameters csv file `parinput` as provided by function `j_parameters` from
+package `MCMphotolysis` is specified, a markdown table with the updated photolysis
+parameters will be written to file `paroutput`.
 """
 function generate_wiki(tuvdir::String; wikitemplates::Union{String, Vector{String}}="",
-  wikioutput::Union{String, Vector{String}}="WIKI.md", MCMcollength::Union{Int64,Vector{Int64}}=10,
-  MCMversion::Union{Int64,Vector{Int64}}=4, parinput::String="",
-  paroutput::String="../MCM-Photolysis-Parameters.md")
+  wikioutput::Union{String, Vector{String}}="WIKI.md",
+  wikidir::String=joinpath(@__DIR__, "../data"), parinput::String="",
+  paroutput::String="../MCM-Photolysis-Parameters.md",
+  MCMcollength::Union{Int64,Vector{Int64}}=10,
+  MCMversion::Union{Int64,Vector{Int64}}=4)
   # Save current directory
   currdir = pwd()
   # Find files related to photolysis mechanism
@@ -101,7 +112,8 @@ function generate_wiki(tuvdir::String; wikitemplates::Union{String, Vector{Strin
   rxnlist = generate_rxns(rxnfiles, callfiles)
 
   # Auto-generate inc files for TUV_DSMACC
-  write_wiki(rxnlist, tuvdir, wikitemplates, wikioutput, MCMcollength, MCMversion, currdir)
+  write_wiki(rxnlist, tuvdir, wikitemplates, wikidir, wikioutput,
+    MCMcollength, MCMversion, currdir)
   write_params(parinput, paroutput, currdir)
   # Go back to original directory
   cd(currdir)

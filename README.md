@@ -9,7 +9,7 @@ generate markdown files for the TUV wiki.
 Installation
 ------------
 
-Go to the package manager and add first the unregistered package 
+Go to the package manager and add first the unregistered package
 [filehandling](https://github.com/pb866/filehandling.git) and then TUVtools.
 You may want to `activate` an environment as optional second step, if you
 don't want the project installed in the main julia environment (where `.` can
@@ -38,7 +38,7 @@ using TUVtools
 ```
 
 **_Currently all functions work only for the MCM/GECKO-A TUV version 5.2.x., where source code has been moved to a separate source folder!_**
-Additional flags to use with the original TUV version will be introduced in the future.
+Additional flags to use with the original TUV version may be introduced in the future.
 
 
 ### Function setrxns
@@ -69,7 +69,7 @@ the remaining line will be auto-filled). Other options are:
 
 ### Function generate_incfiles
 
-Auto-generates include files for the boxmodel 
+Auto-generates include files for the boxmodel
 [DSMACC](https://github.com/pb866/DSMACC-testing.git) to link TUV and DSMACC
 reaction numbers in the model.
 
@@ -77,13 +77,13 @@ reaction numbers in the model.
 generate_incfiles(tuvdir::String)
 ```
 
-Specify the main folder of the TUV version you are using 
+Specify the main folder of the TUV version you are using
 (needs to be the MCM/GECKO-A TUV version rather than original TUV), from
 which the function will derive the TUV reaction numbers.
-DSMACC reaction numbers are saved in `src/data/MCMv32.db`, `src/data/MCMv331.db`,
-and `src/data/MCM-GECKO-A.db` for the respective MCM versions. 
+DSMACC reaction numbers are saved in `data/MCMv32.db`, `data/MCMv331.db`,
+and `data/MCM-GECKO-A.db` for the respective MCM versions.
 
-If you use additonal photolysis reactions or altered the photolysis numbers 
+If you use additonal photolysis reactions or altered the photolysis numbers
 in any way, you need to modify these number either by cloning this repository
 and making sure to load the cloned version into julia or you can `develop` the
 package with the help of the package manager.
@@ -94,23 +94,26 @@ main folder of the specified TUV version.
 
 ### Function generate_wiki
 
-This is a more advanced routine for developers of the MCM/GECKO-A TUV version
-to maintain the wiki pages of the repository.
+This is a more advanced routine for developers of [TUV_MG](https://github.com/pb866/TUV_MG.git)
+— the MCM/GECKO-A version of TUV 5.2 – to maintain the wiki pages of the
+repository.
 
 Function `generate_wiki` can auto-generate wiki pages for the reaction numbers
 used in MCM/GECKO-A and TUV and the improved MCM photolysis parameterisations.
 
-By default, no wiki files are generated unless you specify a template for the wiki page(s) 
+By default, no wiki files are generated unless you specify a template for the wiki page(s)
 or the `parameter.csv` from [MCMphotolysis](https://github.com/pb866/MCMphotolysis.git).
 
 ```julia
 generate_wiki(tuvdir::String; wikitemplates::Union{String, Vector{String}}="",
-  wikioutput::Union{String, Vector{String}}="WIKI.md", MCMcollength::Union{Int64,Vector{Int64}}=10,
-  MCMversion::Union{Int64,Vector{Int64}}=4, parinput::String="",
-  paroutput::String="../MCM-Photolysis-Parameters.md")
+  wikioutput::Union{String, Vector{String}}="WIKI.md",
+  wikidir::String=joinpath(@__DIR__, "../data"), parinput::String="",
+  paroutput::String="../MCM-Photolysis-Parameters.md",
+  MCMcollength::Union{Int64,Vector{Int64}}=10,
+  MCMversion::Union{Int64,Vector{Int64}}=4)
 ```
 
-Specify the main folder of the TUV version used in `tuvdir` to get the TUV
+Specify the main folder of the TUV version in `tuvdir` to get the TUV
 reaction numbers. If you want to generate wiki page(s) for the reaction numbers,
 make sure the DSMACC reaction numbers are correct in the database files
 (see [function `generate_incfiles`](#function-generate_incfiles)).
@@ -121,25 +124,34 @@ Put the reaction string starting at the first character of the line for every re
 you want in the tables at the correct positon in the template. The script will auto-fill-in
 the correct MCM/GECKO-A and TUV reaction numbers in the first two columns and the
 reaction label in the third. Reaction labels have to be the same as in TUV.
-Examples of templates can be found in `src/data`.
+Examples of templates can be found in `./data`. Use these templates (select with
+`wikitemplates`) or save different templates to folder `wikidir`.
 
 Specify the templates with the kwarg `wikitemplates` as `String` for single file
 or as `Vector{String}` for multiple files. Define as many output file names as
-templates with `wikioutput` in the same manor. Specify, which version of the MCM
+templates with `wikioutput` (in the same manor). Specify, which version of the MCM
 you are using for each wiki page as `Int64` or `Vector{Int64}` using `3` for
-MCMv3.3.1 or older and `4` for MCM/GECKO-A. Optionally you can specify the column
+MCMv3.3.1 or older and `4` for MCM/GECKO-A. Optionally, you can specify the column
 length of the MCM/GECKO-A reaction number column for nicer formatting of the table
 in the md files. TUV columns will always be for 3-digit integers.
 
 If you want to generate the parameter list for the improved MCM/GECKO-A
 photolysis parameterisations, specify the location and file name of the
 `parameters.csv` from [MCMphotolysis](https://github.com/pb866/MCMphotolysis.git)
-with kwarg `parinput`. To specify a location and file name for the 
+with kwarg `parinput`. To specify a location and file name for the
 auto-generated markdown file use kwarg `paroutput`.
 
 
 Version history
 ===============
+
+Version 0.1.2
+-------------
+- Use `import` for filehandling (as `fh`) rather than `using`
+- Add support for line breaks in j labels in the reaction files
+- Move `data` folder from `src` to main folder
+- New kwarg `wikidir` to specify the directory of the wiki templates
+- Bug fixes
 
 Version 0.1.1
 -------------
@@ -151,6 +163,6 @@ Version 0.1.0
 - New function `setrxns` to auto-generate TUV input files
 - New function `generate_incfiles` to auto-generate DSMACC include files
   to link TUV to DSMACC
-- New function `generate_wiki` to auto-generate wiki files for the 
+- New function `generate_wiki` to auto-generate wiki files for the
   MCM/GECKO-A and TUV reaction numbers and for the improved MCM/GECKO-A
   photolysis parameterisations

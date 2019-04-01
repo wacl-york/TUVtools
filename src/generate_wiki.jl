@@ -1,69 +1,73 @@
 """
-    write_wiki(rxnlist, tuvdir, ifile, ofile, len, DB, currdir)
+    write_wiki(rxnlist, tuvdir, ifile, wikidir, ofile, len, DB, currdir)
 
-From the `rxnlist` of TUV reactions in the order of the output file and the directory
-of the current TUV version `tuvdir`, write wiki markdown files as specified by function
-generate_wiki.
+From the `rxnlist` of TUV reactions in the order of the output file and the
+directory of the current TUV version `tuvdir`, write wiki markdown files as
+specified by function `generate_wiki` to files listed in `ofile` using templates
+`ifile` in `wikidir`, the column width `len` for output formatting, and the
+MCM version numbers in `DB`. Folder path `currdir` remembers the directory, the script
+was started from.
 """
-function write_wiki(rxnlist, tuvdir, ifile, ofile, len, DB, currdir)
-  # Skip routine, if no template is provided
-  if ifile == ""  return  end
+function write_wiki(rxnlist, tuvdir, ifile, wikidir, ofile, len, DB, currdir)
   # Make sure to be in the TUV main directory
   cd(tuvdir)
-  ifile, ofile, len, db = init_wikifiles(ifile, ofile, len, DB, currdir)
-
+  ifile, ofile, len, db = init_wikifiles(ifile, ofile, len, DB, currdir, wikidir)
   for i = 1:length(ifile)
-    wiki = readfile(ifile[i])
-    counter = 0
+    # Skip non-existant files
+    if ifile[i] == ""  continue  end
+    wiki = fh.readfile(ifile[i])
+    counter = 0; fail = 0
     for (j, rxn) = enumerate(unique(db[i][:label]))
       n = findfirst(startswith.(wiki,rxn))
       try
         wiki[n] = @sprintf("%s | %3d | %s", rpad("J($(db[i][:number][j]))",len[i]),
           findfirst(rxnlist.==rxn), wiki[n])
         counter += 1
-      catch;
+      catch
+        fail += 1
       end
     end # loop over reactions
     open(ofile[i], "w") do f
       [println(f, line) for line in wiki]
     end # close file
     println("Reaction numbers for $counter reactions written to $(basename(ofile[i])).")
+    if fail > 0  println("Failed to write $fail reactions from template.")  end
   end # loop over files
 end #function write_wiki
 
 
 """
-    init_wikifiles(ifile, ofile, len, DB, currdir)
+    init_wikifiles(ifile, ofile, len, DB, currdir, wikidir)
 
-Set up files for function write_wiki with I/O files (`ifile`/`ofile`), the column
-`len`gth for markdown output, the MCM version numbers (`DB`), and the working
-directory (`currdir`) to transform folder paths into absolute paths from the kwargs
-of function generate_wiki.
+Set up files for function write_wiki with I/O files (`ifile` in `wikidir`/`ofile`),
+the column width `len` for markdown output, the MCM version numbers (`DB`), and the
+working directory (`currdir`) to transform folder paths into absolute paths from
+the kwargs of function generate_wiki.
 """
-function init_wikifiles(ifile, ofile, len, DB, currdir)
+function init_wikifiles(ifile, ofile, len, DB, currdir, wikidir)
   collength = Int64[]; db = []
   # Read MCM reaction numbers saved in the data files for every version
-  mcm3 = read_data(joinpath(@__DIR__, "data/MCMv331.db"), sep = "|",
+  mcm3 = fh.loadfile("../data/MCMv331.db", dir = @__DIR__, sep = "|",
   headerskip = 1, colnames = ["number", "label"])
-  mcm4 = read_data(joinpath(@__DIR__, "data/MCM-GECKO-A.db"), sep = "|",
+  mcm4 = fh.loadfile("../data/MCM-GECKO-A.db", dir = @__DIR__, sep = "|",
   headerskip = 1, colnames = ["number", "label"])
+  mcm3[:label] = strip.(mcm3[:label]); mcm4[:label] = strip.(mcm4[:label])
   database = [mcm3, mcm4]
-  # Make sure, all kwargs are vectors
+  # Make sure, all files are saved in vectors
   if ifile isa String  ifile = [ifile]  end
   if ofile isa String  ofile = [ofile]  end
   if length(ifile) ≠ length(ofile)
-    println("\033[95mError! Different number of input and output files specified.")
-    println("Julia stopped.\033[0m")
+    println("\033[95mError! Different number of input and output files specified.\033[0m")
   end
   if len isa Number
     [push!(collength, len) for i = 1:length(ifile)]
   else
     collength = len
   end
-  # Convert input paths to absolute folder paths
+  # Convert input paths to absolute folder paths and test existence of wiki templates
   for i = 1:length(ifile)
-    if !isabspath(ifile[i])  ifile[i] = normpath(joinpath(currdir, ifile[i]))  end
-    if !isabspath(ofile[i])  ofile[i] = normpath(joinpath(currdir, ofile[i]))  end
+    ifile[i] = fh.filetest(ifile[i], dir = wikidir)
+    if !isabspath(ofile[i])  ofile[i] = abspath(joinpath(currdir, ofile[i]))  end
   end
   # Set up database with MCM/GECKO-A reaction numbers for correct MCM version
   [push!(db, database[i-2]) for i in DB]
@@ -84,17 +88,17 @@ function write_params(ifile, ofile, pwd)
   # Skip routine, if no template is provided
   if ifile == ""  return  end
   # Determine absolute paths of I/O files
-  if !isabspath(ifile)  ifile = joinpath(pwd, ifile)  end
-  if !isabspath(ofile)  ofile = joinpath(pwd, ofile)  end
+  if !isabspath(ifile)  ifile = abspath(pwd, ifile)  end
+  if !isabspath(ofile)  ofile = abspath(pwd, ofile)  end
   # Read header of md file
-  header = readfile(joinpath(@__DIR__, "data/params_header.md"))
+  header = fh.readfile("../data/params_header.md", dir = @__DIR__)
 
   # Open output file
   open(ofile,"w") do f
     # print header
     [println(f, line) for line in header]
     # Read parameter file from MCMphotolysis
-    param = read_data(ifile, sep = ";", header = 1)
+    param = fh.loadfile(ifile, sep = ";", header = 1)
      # Loop over reactions
     for i = 1:length(param[1])
       # Retrieve and format l parameters and errors

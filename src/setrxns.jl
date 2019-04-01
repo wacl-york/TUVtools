@@ -20,7 +20,7 @@ end #function getfiles
     generate_rxns(rxnfiles, callfiles)
 
 From the `rxnfiles` with the reaction subroutines and the `callfiles` with the
-subroutine call of the reaction routines, generate a vector of strings holding
+subroutine calls of the reaction routines, generate a vector of strings holding
 all reaction labels in the order needed for the input files and return it.
 """
 function generate_rxns(rxnfiles, callfiles)
@@ -33,7 +33,7 @@ function generate_rxns(rxnfiles, callfiles)
   order = getorder(callfiles)
 
   # Save O2 reaction label from swchem.f
-  lines = readfile("swchem.f")
+  lines = fh.readfile("swchem.f")
   iO2 = findfirst([occursin(r"^[ \t]*jlabel"i, line) for line in lines])
   O2rxn = replace(lines[iO2], r"^(.*?)(\'|\")" => "")
   O2rxn = strip(replace(O2rxn, r"(\'|\").*" => ""))
@@ -53,7 +53,7 @@ end
 
 Use regex search to find all subroutine names and reaction labels in the `filelist`
 with the rxn files and return a dictionary with routine names as keys and the
-associated reaction labels in order as entries.
+associated ordered reaction labels as entries.
 """
 function findrxnlabel(filelist)
   # Initialise dictionary with subroutines and their associated reactions
@@ -62,7 +62,7 @@ function findrxnlabel(filelist)
   # Loop over rxn files
   for file in filelist
     # Read file
-    lines = readfile(file)
+    lines = fh.readfile(file)
     # Find lines with subroutine names and reaction lables
     isubs = findall([occursin(r"^[ \t]*subroutine"i, line) for line in lines])
     irxns = findall([occursin(r"^[ \t]*jlabel"i, line) for line in lines])
@@ -73,7 +73,17 @@ function findrxnlabel(filelist)
     subs = [strip(match(r"(?<=subroutine).*?(?=\()"i, rxn).match) for rxn in lines[isubs]]
 
     # Save reaction labels
-    rxns = [match(r"(?<=\"|\').*(?=\"|\')"i, rxn).match for rxn in lines[irxns]]
+    rxns = String[]
+    for (i, rxn) in zip(irxns, lines[irxns])
+      jlabel = try match(r"(?<=\"|\').*(?=\"|\')"i, rxn).match
+      catch
+        if lines[i+1][6] ≠ ' '
+          match(r"(?<=\"|\').*(?=\"|\')"i, lines[i+1]).match
+        end
+      end
+      push!(rxns, jlabel)
+    end
+    # rxns = [match(r"(?<=\"|\').*(?=\"|\')"i, rxn).match for rxn in lines[irxns]]
 
     # Add index for end of file
     push!(isubs, length(lines))
@@ -103,7 +113,7 @@ function getorder(filelist)
   # Loop over input files in reverse alphabetical order (as they are called in TUV)
   for file in reverse(sort(filelist))
     # Read files
-    lines = readfile(file)
+    lines = fh.readfile(file)
     # Find subroutine names in order
     isubs = findall([occursin(r"^[ \t]*call"i, line) for line in lines])
     subs = [replace(line, r"^.*call"i => "") for line in lines[isubs]]
@@ -141,7 +151,7 @@ function write_rxns(filelist, tuvdir, rxnlist, setflags)
   # Loop over files
   for file in filelist
     # Read input file, and find mechanism section and number of output reactions
-    lines = readfile(file)
+    lines = fh.readfile(file)
     istart = findfirst(occursin.("photolysis reactions", lines))
     iend   = findlast(startswith.(lines, "==="))
     inmj   = findfirst(occursin.("nmj", lines))
@@ -162,12 +172,13 @@ end #function write_rxns
 
 
 """
-    set_flags(setflags, rxnlist, istart::Int64=0, iend::Int64=0, lines::Vector{String}=String[])
+    set_flags(setflags, rxnlist, istart::Int64=0, iend::Int64=0, lines::Vector{String}=String[], scen::String="")
 
-Set flags according to `setflags` option for reactios in the `rxnlist`.
+Set flags according to `setflags` option for reactions in the `rxnlist`.
 For the default `setflags` option to leave flags unchagend, additionally the file
-content of the current TUV file `lines`, and the beginning `istartz` and end index
-`iend` of the mechanism section is needed.
+content of the current TUV file `lines`, and the beginning `istart` and end index
+`iend` of the mechanism section is needed. Use the filename `scen` of the current
+input file for details of error messages.
 
 The following `setflags` options exist (default: use from original input file):
 - `0`: Set all flags to `F`
@@ -202,12 +213,13 @@ function set_flags(setflags, rxnlist, istart::Int64=0, iend::Int64=0,
     flags .= 'T'
   elseif setflags > 1
     if setflags == 2
-      mcm = read_data(joinpath(@__DIR__, "data/MCM-GECKO-A.db"), sep = "|",
+      mcm = fh.loadfile("../data/MCM-GECKO-A.db", dir = @__DIR__, sep = "|",
       headerskip = 1, colnames = ["number", "label"])
     elseif setflags == 3
-      mcm = read_data(joinpath(@__DIR__, "data/MCMv331.db"), sep = "|",
+      mcm = fh.loadfile("../data/MCMv331.db", dir = @__DIR__, sep = "|",
       headerskip = 1, colnames = ["number", "label"])
     end
+    mcm[:label] = strip.(mcm[:label])
     flags = Vector{Char}(undef, length(rxnlist))
     flags .= 'F'
     fail = String[]
@@ -239,12 +251,15 @@ to link TUV to it and save them in the main TUV folder.
 """
 function write_incfiles(rxnlist, tuvdir)
   cd(tuvdir)
-  mcm32 = read_data(joinpath(@__DIR__, "data/MCMv32.db"), sep = "|",
+  mcm32 = fh.loadfile("../data/MCMv32.db", dir = @__DIR__, sep = "|",
   headerskip = 1, colnames = ["number", "SF", "label"])
-  mcm33 = read_data(joinpath(@__DIR__, "data/MCMv331.db"), sep = "|",
+  mcm33 = fh.loadfile("../data/MCMv331.db", dir = @__DIR__, sep = "|",
   headerskip = 1, colnames = ["number", "label"])
-  mcm4 = read_data(joinpath(@__DIR__, "data/MCM-GECKO-A.db"), sep = "|",
+  mcm4 = fh.loadfile("../data/MCM-GECKO-A.db", dir = @__DIR__, sep = "|",
   headerskip = 1, colnames = ["number", "label"])
+  mcm32[:label] = strip.(mcm32[:label])
+  mcm33[:label] = strip.(mcm33[:label])
+  mcm4[:label]  = strip.(mcm4[:label])
   db = [mcm32, mcm33, mcm4]
   for (i, file) in enumerate(["MCMv32.inc", "MCMv331.inc", "MCM-GECKO-A.inc"])
     open(file, "w") do f
